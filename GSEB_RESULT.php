@@ -1,15 +1,22 @@
 <?php
 
-if (isset($_GET['roll'])) {
+if (isset($_GET['roll'])) 
+{
 	$rol = stripcslashes($_GET['roll']);
 	$rol = htmlspecialchars($rol);
 }
+else
+{
+	$j = array();
+	$j["Error"] = "Please specify a roll number using 'roll' field";
+	die(json_encode($j));
+}
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "http://www.gseb.org/4102noitulover/sci/".substr($rol,0,3)."/".substr($rol,3,2)."/".$rol.".html");
+$URL = "http://www.gseb.org/4102noitulover/sci/".substr($rol,0,3)."/".substr($rol,3,2)."/".$rol.".html";
+curl_setopt($ch, CURLOPT_URL, $URL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-curl_setopt($ch, CURLOPT_HEADER, 0);
 
 curl_close($ch);
 
@@ -25,15 +32,15 @@ $arr = array();
 
 foreach($matches[1] as $key => $mat)
 {
-		if($key%3==0)
+		if($key%3==0)  // All Even numbers are marks... All other is foolish stuff :P
 		{
-			//echo $mat."<br
-		array_push($arr, $mat);
+			array_push($arr, $mat);
 		}
 }
 
 preg_match_all('!\d+!',implode($matches_sub[1]),$arr4);
 
+//Shitty Extraction of variables start
 $counter = count($matches_sub[1]);
 $arr2 = array_slice($arr,0,$counter);
 $arr3 = array_combine($arr4[0],$arr2);
@@ -43,6 +50,8 @@ $arr3['sci'] = $matches_name[1][3];
 $arr3['per'] = $matches_name[1][4];
 $arr3['total'] = $matches[1][count($matches[1])-2];
 
+
+//end
 echo json_encode($arr3);
 	
 ?>
