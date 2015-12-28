@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_GET['roll'])) 
 {
 	$rol = stripcslashes($_GET['roll']);
@@ -18,9 +17,10 @@ curl_setopt($ch, CURLOPT_URL, $URL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 
-curl_close($ch);
 
 $value = curl_exec($ch);
+curl_close($ch);
+
 $regexp_marks='/\<td align\=\'center\'\>(.*?)\<\/td\>/';
 $regexp_name = '/\<\/b\>(.*?)\<\/span\>/';
 $regexp_sub = '/\<tr\>\<td align\=\'left\'\>(.*?)\<\/td\>/'; 
