@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 if (isset($_GET['roll'])) {
 	$rol = stripcslashes($_GET['roll']);
@@ -7,11 +7,9 @@ if (isset($_GET['roll'])) {
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "http://www.gseb.org/4102noitulover/sci/".substr($rol,0,3)."/".substr($rol,3,2)."/".$rol.".html");
-curl_setopt($ch, CURLOPT_HTTPGET, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-curl_setopt ($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+curl_setopt($ch, CURLOPT_HEADER, 0);
 
 curl_close($ch);
 
