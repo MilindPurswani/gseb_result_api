@@ -32,7 +32,7 @@ $arr = array();
 
 foreach($matches[1] as $key => $mat)
 {
-		if($key%3==0)  // All Even numbers are marks... All other is foolish stuff :P
+		if($key%3==0)  // All numbers in multiples of 3 are marks... All other is foolish stuff :P
 		{
 			array_push($arr, $mat);
 		}
